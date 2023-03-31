@@ -32,39 +32,24 @@ function App() {
 
   const [pokemonIndex, setPokemonIndex] = useState(0);
   const pokemon = pokemonList[pokemonIndex];
-  const isPrevDisabled = pokemonIndex === 0;
-  const isNextDisabled = pokemonIndex === pokemonList.length - 1;
-
-  const handlePrevClick = () => {
-    if(pokemonIndex>0){
-      setPokemonIndex(pokemonIndex-1);
+  const handlePokemonClick = (index) => {
+    setPokemonIndex(index);
+    if (pokemonList[index].name === "pikachu"){
+      alert("pika pikachu !!!")
     }
-  };
-
-  const handleNextClick = () => {
-    if (pokemonIndex < pokemonList.length - 1) {
-      setPokemonIndex(pokemonIndex + 1);
-    }
-  };
-
-  if (pokemon.name === "pikachu") {
-    alert("pika pikachu !!!");
   }
   
-
   useEffect(()=>{
     alert("hello pokemon trainer :)");
   }, []);
 
   return (
     <div>
-      <PokemonCard pokemon={pokemon}/>
       <NavBar
-        onPrevClick={handlePrevClick}
-        onNextClick={handleNextClick}
-        isPrevDisabled={isPrevDisabled}
-        isNextDisabled={isNextDisabled}
+        pokemonList={pokemonList}
+        onPokemonClick={handlePokemonClick}
       />
+      <PokemonCard pokemon={pokemon}/>
     </div>
   );
 }
